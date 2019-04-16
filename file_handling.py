@@ -10,6 +10,14 @@ def import_data(filename='albums_data.txt'):
     :returns: list of lists representing albums' data
     :rtype: list
     """
+    album_list = []
+    with open(filename, "r") as f:
+        lines = f.readlines()
+        for row in lines:
+            rows = row.strip().split(",")
+            album_list.append(rows)
+        return album_list    
+
 
 def export_data(albums, filename='albums_data.txt', mode='a'):
     """
@@ -25,3 +33,9 @@ def export_data(albums, filename='albums_data.txt', mode='a'):
         'Wrong write mode'
     """
 
+    if mode not in ["w", "a"]:
+        raise ValueError('Wrong write mode')
+    with open(filename, mode) as f:
+        for line in albums:
+            row = ",".join(line)
+            f.write(row + "\n")    

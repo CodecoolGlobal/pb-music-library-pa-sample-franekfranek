@@ -11,10 +11,10 @@ def print_albums_list(albums_data):
         print(' | '.join(album))
 
 
-def print_program_menu(menu_commands):
+def print_program_menu(menu_commands, exit_massa):
     for option in menu_commands:
-        print(str(menu_commands.index(option)) + '----->' + option)
-
+        print(str(menu_commands.index(option)+1) + '----->' + option)
+    print(exit_massa)    
 
 def print_command_result(message):
     vertical_spacing = 2
