@@ -1,7 +1,7 @@
 YEAR = 2
 GENRE = 3
 LEN_OF_ALBUM = 4
-
+SECONDS = 60
 
 def get_albums_by_genre(albums, genre):
     """
@@ -22,7 +22,6 @@ def get_albums_by_genre(albums, genre):
             list_of_albums.append(album)
     if genre not in second_list:
         raise ValueError('Wrong genre')   
-    return list_of_albums         
 
 
 def get_longest_album(albums):
@@ -34,7 +33,17 @@ def get_longest_album(albums):
     :returns: longest album
     :rtype: list
     """
-
+    
+    max_len= 0 
+    max_album = None
+    for album in albums:
+        album_year = album[YEAR]
+        album_len = (album[LEN_OF_ALBUM].split(":"))
+        album_len_sec = int(album_len[0]) * SECONDS + int(album_len[1])
+        if album_len_sec > max_len or max_len == 0:
+            max_len = album_len_sec
+            max_album = album
+    return max_album         
 
 def get_total_albums_length(albums):
     """
@@ -44,3 +53,12 @@ def get_total_albums_length(albums):
     :returns: total albums' length in minutes
     :rtype: float
     """
+    list_of_len = []
+    for album in albums:
+        album_len = album[LEN_OF_ALBUM].split(":")
+        len_in_sec = [int(album_len[0]) * SECONDS + int(album_len[1])]
+        list_of_len.extend(len_in_sec)
+    return round(list_of_len / SECONDS, 2)    
+
+
+def     
